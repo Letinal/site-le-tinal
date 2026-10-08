@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import prog from '../data/programme.json';
+const evts = [...prog.evenements].sort((a,b)=>a.date.localeCompare(b.date));
+const moisCourt = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+const jour = (d)=> new Date(d).getDate();
+const mois = (d)=> moisCourt[new Date(d).getMonth()];
+const dateLongue = (d)=> new Date(d).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const couleurType = (t='')=>{const s=t.toLowerCase();
+  if(s.includes('festival')) return 't-magenta';
+  if(s.includes('concert')||s.includes('musi')||s.includes('chorale')||s.includes('bluegrass')||s.includes('swing')||s.includes('danse')) return 't-coral';
+  if(s.includes('spectacle')||s.includes('clown')||s.includes('théât')) return 't-turquoise';
+  if(s.includes('conte')) return 't-jaune';
+  if(s.includes('verniss')||s.includes('expo')||s.includes('sérigraph')||s.includes('serigraph')||s.includes('art')||s.includes('ciné')||s.includes('cine')) return 't-violet';
+  if(s.includes('jeu')||s.includes('quizz')||s.includes('karaok')||s.includes('mario')||s.includes('puzzle')||s.includes('march')||s.includes('dégust')||s.includes('degust')) return 't-jaune';
+  return 't-vert';};
+const affiches = [['mai','Mai'],['juin','Juin'],['juillet','Juillet'],['aout','Août'],['septembre','Septembre'],['octobre','Octobre']];
+---
+<Base title="Programme" description={`Programme de la saison ${prog.annee} de l'association Le Tinal à Ouveillan.`}>
+  <section class="section" style="padding-top:52px">
+    <div class="contenu">
+      <span class="eyebrow">{site.saisonLabel}</span>
+      <h1>Programme {prog.annee}</h1>
+      <p style="color:var(--ink);max-width:62ch">Le détail de toute la saison ci-dessous. Le Tinal est ouvert tous les vendredis. L'accès au café associatif (boissons et restauration) est réservé aux <a href="/adherer">adhérents</a>.</p>
+      <div class="dl-affiches">
+        <span class="lbl">Télécharger les affiches (une par mois, PDF)</span>
+        <div class="dl-mois">
+          {affiches.map(([f,label]) => <a class="bouton secondaire" href={`/affiches/affiche-${f}.pdf`} download>{label}</a>)}
+        </div>
+      </div>
+
+      <div style="margin-top:22px">
+      {evts.map(e => (
+        <article class={`evt ${couleurType(e.type)}`}>
+          <div class="cal"><div class="j">{jour(e.date)}</div><div class="m">{mois(e.date)}</div></div>
+          <div>
+            {e.image && <img class="evt-img" src={`/photos/events/${e.image}`} alt={e.titre} loading="lazy" />}
+            <h3>{e.titre}{e.gratuit ? <span class="badge gratuit">Gratuit</span> : (e.prix && <span class="badge">{e.prix}</span>)}</h3>
+            <div class="meta">{[dateLongue(e.date), e.heure, e.type, e.lieu].filter(Boolean).join(" · ")}</div>
+            {e.description && <p>{e.description}</p>}
+          </div>
+        </article>
+      ))}
+      </div>
+      <div class="encart">
+        <strong>Envie de ne rien manquer&nbsp;?</strong> Adhérez à l'association&nbsp;: vous soutenez la programmation et faites vivre le café associatif.
+        <p style="margin:12px 0 0"><a class="bouton" href="/adherer">Adhérer</a></p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+const helloasso = 'https://www.helloasso.com/associations/le-tinal/adhesions/adhesion-au-tinal';
+---
+<Base title="Adhérer" description="Adhérez en ligne à l'association Le Tinal (Ouveillan) via HelloAsso.">
+  <section class="section" style="padding-top:52px">
+    <div class="contenu" style="max-width:720px">
+      <span class="eyebrow">Rejoignez-nous</span>
+      <h1>Adhérer au Tinal</h1>
+      <p style="max-width:62ch">{site.cotisationTexte}</p>
+      <div class="encart">
+        Adhésion de soutien — saison {site.saisonAnnee}, <strong>montant libre</strong>. Paiement sécurisé et reçu délivrés par <strong>HelloAsso</strong>, sans frais pour l'association.
+      </div>
+      <p style="margin:26px 0 10px">
+        <a class="bouton" href={helloasso} target="_blank" rel="noopener" style="font-size:1.05rem;padding:16px 32px">J'adhère sur HelloAsso &rarr;</a>
+      </p>
+      <p class="aide">Vous serez redirigé vers la page sécurisée HelloAsso de l'association. Vous pouvez aussi adhérer sur place, au café associatif.</p>
+    </div>
+  </section>
+</Base>

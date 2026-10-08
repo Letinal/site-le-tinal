@@ -1,0 +1,13 @@
+# build
+dist/
+.astro/
+# deps
+node_modules/
+# cloudflare local
+.wrangler/
+# env / secrets
+.env
+.dev.vars
+# os
+.DS_Store
+Thumbs.db

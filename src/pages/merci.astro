@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+const statut = Astro.url.searchParams.get('statut') || '';
+const paye = statut === 'paye';
+---
+<Base title="Merci">
+  <section class="section" style="padding-top:60px">
+    <div class="contenu" style="max-width:640px;text-align:center">
+      <h1 style="text-align:center">Merci&nbsp;!</h1>
+      {paye ? (
+        <p>Votre adhésion à {site.nom} est confirmée et votre paiement a bien été reçu. À très bientôt lors de nos rendez-vous&nbsp;!</p>
+      ) : (
+        <p>Votre demande d'adhésion est bien enregistrée. Si le paiement en ligne n'a pas abouti, vous pourrez régler sur place lors d'un prochain événement. Nous revenons vers vous par e-mail.</p>
+      )}
+      <p style="margin-top:24px">
+        <a class="bouton" href="/programme">Découvrir le programme</a>
+        <a class="bouton secondaire" href="/">Retour à l'accueil</a>
+      </p>
+    </div>
+  </section>
+</Base>

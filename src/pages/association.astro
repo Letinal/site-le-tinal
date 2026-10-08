@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="L'association" description={site.objet}>
+  <section class="section" style="padding-top:40px">
+    <div class="contenu">
+      <img class="banniere" src="/photos/asso.jpg" alt="L'équipe du Tinal devant le café associatif" />
+      <span class="eyebrow">Le Tinal d'Ouveillan</span>
+      <h1>L'association</h1>
+      <p>{site.objet}</p>
+      <h2>Notre raison d'être</h2>
+      <p>Le Tinal fait vivre la culture et le lien social à Ouveillan et dans les villages voisins&nbsp;: concerts, projections, marchés, ateliers et moments de partage, tout au long de la saison de mai à octobre.</p>
+      <div class="cartes" style="margin-top:20px">
+        <div class="carte c1">
+          <h3>Informations légales</h3>
+          <p>{site.loi1901}</p>
+          <p>Siège&nbsp;: {site.adresse}</p>
+        </div>
+        <div class="carte c2">
+          <h3>Nous contacter</h3>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <p><a href={site.instagram} target="_blank" rel="noopener"><strong>Suivez-nous sur Instagram</strong></a> · <a href={site.facebook} target="_blank" rel="noopener">Facebook</a></p>
+        </div>
+        <div class="carte c3">
+          <h3>Nous rejoindre</h3>
+          <p>{site.cotisationTexte}</p>
+          <p><a class="bouton" href="/adherer">Adhérer</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,402 @@
+{
+  "annee": "2026",
+  "note": "Programme 2026 officiel (saison mai-octobre), d'apres les affiches Le Tinal. Le Tinal est ouvert tous les vendredis. Horaires et details susceptibles d'evoluer.",
+  "evenements": [
+    {
+      "date": "2026-05-01",
+      "heure": "20h",
+      "titre": "Orsanne — 5.2 coupe",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "prix": "Participation libre",
+      "description": "Chanson francaise : Ulysse et Orsanne racontent l'evolution d'une relation amoureuse entre deux artistes.",
+      "image": "2026-05-01.jpg"
+    },
+    {
+      "date": "2026-05-08",
+      "heure": "20h",
+      "titre": "La fanfare de guitare",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "prix": "Participation libre",
+      "description": "Des amateurs devenus vedettes inter-cantonales : faire de la musique ensemble soigne tout ou presque.",
+      "image": "2026-05-08.jpg"
+    },
+    {
+      "date": "2026-05-15",
+      "heure": "17h",
+      "titre": "Ateliers cuisine & nature",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Couscous de printemps ou bombes a graines : deux ateliers pour apprendre dans la convivialite.",
+      "image": "2026-05-15.jpg"
+    },
+    {
+      "date": "2026-05-20",
+      "titre": "Fete de la sante",
+      "type": "Rencontre",
+      "lieu": "Parvis",
+      "gratuit": true,
+      "description": "#Addict a ma sante ! Stands, ateliers, jeux et infos pour tout age avec le Bus parlons sante, de 10h a 17h.",
+      "image": "2026-05-20.jpg"
+    },
+    {
+      "date": "2026-05-22",
+      "heure": "18h",
+      "titre": "Soiree Jeux — Take Time",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "Presentation du jeu nomme aux As d'Or 2026 par l'un de ses auteurs.",
+      "image": "2026-05-22.jpg"
+    },
+    {
+      "date": "2026-05-29",
+      "heure": "20h",
+      "titre": "Solo de clown",
+      "type": "Spectacle",
+      "lieu": "Le Tinal",
+      "description": "Gwendoline, clown rageuse et philosophe, parle de la Vie en parlant avec les morts. Sur reservation.",
+      "image": "2026-05-29.jpg"
+    },
+    {
+      "date": "2026-05-30",
+      "heure": "14h",
+      "titre": "Stage de clown en duo",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "prix": "15 € / duo",
+      "description": "Reveillez les clowns qui sont en vous avec Gwendoline, suivi d'un gouter. A partir de 8 ans."
+    },
+    {
+      "date": "2026-06-05",
+      "heure": "19h",
+      "titre": "Concert Bao Pao",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "description": "Les Arcs en scene jouent du Bao Pao, un instrument qui fonctionne en coupant un laser avec une baguette.",
+      "image": "2026-06-05.jpg"
+    },
+    {
+      "date": "2026-06-12",
+      "heure": "17h",
+      "titre": "Ateliers cuisine & nature",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Maryse devoile ses secrets de piece montee pendant qu'Aude fait decouvrir les pollinisateurs.",
+      "image": "2026-06-12a.jpg"
+    },
+    {
+      "date": "2026-06-12",
+      "heure": "22h",
+      "titre": "Cine plein air",
+      "type": "Cine",
+      "lieu": "Le Tinal",
+      "description": "Apporte ton siege le plus confortable et viens te rafraichir les idees.",
+      "image": "2026-06-12b.jpg"
+    },
+    {
+      "date": "2026-06-19",
+      "titre": "Chorale Ephemere",
+      "type": "Musique",
+      "lieu": "Le Tinal",
+      "description": "Ouvert a toutes les voix, de la casserole a la castafiore. Sur reservation.",
+      "image": "2026-06-19.jpg"
+    },
+    {
+      "date": "2026-06-20",
+      "titre": "Fete de la Musique",
+      "type": "Musique",
+      "lieu": "Village",
+      "gratuit": true,
+      "description": "2e edition : artistes 100% locaux dans une ambiance festive. Buvette et restauration sur place."
+    },
+    {
+      "date": "2026-06-26",
+      "titre": "Challenge Puzzle",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "En equipe, finirez-vous le puzzle de 300 pieces dans le temps imparti, avec quelques contraintes tinaliennes ?",
+      "image": "2026-06-26.jpg"
+    },
+    {
+      "date": "2026-07-03",
+      "heure": "18h",
+      "titre": "Vernissage expo",
+      "type": "Vernissage",
+      "lieu": "Le Tinal",
+      "description": "Jean Claude Dreyfus fait son cinema, en presence de Nicolas Vincent et Jean Claude Dreyfus.",
+      "image": "2026-07-03a.jpg"
+    },
+    {
+      "date": "2026-07-03",
+      "heure": "21h30",
+      "titre": "Cine plein air",
+      "type": "Cine",
+      "lieu": "Le Tinal",
+      "description": "Viens en DeLorean pour une viree dans le passe avec ce film culte de 1985 !",
+      "image": "2026-07-03b.jpg"
+    },
+    {
+      "date": "2026-07-10",
+      "heure": "18h",
+      "titre": "Balade comestible",
+      "type": "Balade",
+      "lieu": "Le Tinal",
+      "description": "Sais-tu reconnaitre les plantes comestibles de notre campagne ouveillannaise ?",
+      "image": "2026-07-10b.jpg"
+    },
+    {
+      "date": "2026-07-10",
+      "heure": "20h",
+      "titre": "Paul Cribaillet",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "prix": "Participation libre",
+      "description": "Pop anglo-saxonne et chanson francaise a textes, concerts intimistes tout en douceur.",
+      "image": "2026-07-10a.jpg"
+    },
+    {
+      "date": "2026-07-17",
+      "heure": "17h",
+      "titre": "Atelier sorbet",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Viens te rafraichir avec cette recette de glace insolite que Tom t'a preparee.",
+      "image": "2026-07-17.jpg"
+    },
+    {
+      "date": "2026-07-24",
+      "titre": "Soiree Jeux plein air",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "",
+      "image": "2026-07-24.jpg"
+    },
+    {
+      "date": "2026-07-31",
+      "heure": "18h30",
+      "titre": "Marche nocturne",
+      "type": "Marche",
+      "lieu": "Village",
+      "gratuit": true,
+      "description": "3e edition du marche nocturne estival : artisans du coin, vins du terroir et Les Faussaires, groupe 100% local."
+    },
+    {
+      "date": "2026-08-07",
+      "titre": "Soiree Jeux plein air",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "",
+      "image": "2026-08-07.jpg"
+    },
+    {
+      "date": "2026-08-14",
+      "titre": "Balade chantante",
+      "type": "Balade",
+      "lieu": "Le Tinal",
+      "description": "Saurez-vous reconnaitre les oiseaux qui chantent dans notre campagne ? Amenez vos jumelles !",
+      "image": "2026-08-14a.jpg"
+    },
+    {
+      "date": "2026-08-14",
+      "heure": "18h30",
+      "titre": "Danse latine",
+      "type": "Danse",
+      "lieu": "Le Tinal",
+      "description": "Celia propose une initiation aux danses latines (salsa, bachata).",
+      "image": "2026-08-14b.jpg"
+    },
+    {
+      "date": "2026-08-14",
+      "heure": "21h",
+      "titre": "Cine plein air",
+      "type": "Cine",
+      "lieu": "Le Tinal",
+      "description": "Derniere projection de l'ete : n'oublie pas ton siege le plus confortable.",
+      "image": "2026-08-14c.jpg"
+    },
+    {
+      "date": "2026-08-21",
+      "titre": "Cuisine cambodgienne",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Le Tinal mijote ! Sur reservation.",
+      "image": "2026-08-21a.jpg"
+    },
+    {
+      "date": "2026-08-21",
+      "heure": "18h",
+      "titre": "Tournoi Mariokart",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "Viens taquiner la manette et envoyer tes adversaires aux oubliettes ! Inscription obligatoire.",
+      "image": "2026-08-21b.jpg"
+    },
+    {
+      "date": "2026-08-28",
+      "heure": "20h",
+      "titre": "Festinal 3.0",
+      "type": "Festival",
+      "lieu": "Le Tinal",
+      "gratuit": true,
+      "description": "Michel FM revisite les classiques de la chanson francaise a la sauce pop-rock. Entree libre !",
+      "image": "2026-08-28.jpg"
+    },
+    {
+      "date": "2026-08-29",
+      "heure": "18h",
+      "titre": "Soiree Swing",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "description": "Pour l'anniversaire du Tinal, danse sur le swing des Dirty Dungarees. Initiation Lindy-Hop a 18h, concert a 20h.",
+      "image": "2026-08-29.jpg"
+    },
+    {
+      "date": "2026-09-04",
+      "heure": "17h",
+      "titre": "Atelier cuisine armenienne",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Elena nous fait decouvrir la cuisine de ses ancetres armeniens.",
+      "image": "2026-09-04a.jpg"
+    },
+    {
+      "date": "2026-09-04",
+      "heure": "18h",
+      "titre": "Apero philo",
+      "type": "Rencontre",
+      "lieu": "Le Tinal",
+      "description": "Associations : un ideal, un droit, un outil ?"
+    },
+    {
+      "date": "2026-09-04",
+      "heure": "20h",
+      "titre": "Bluegrass Session",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "description": "Soiree dediee au bluegrass americain, alliant energie pure et virtuosite.",
+      "image": "2026-09-04c.jpg"
+    },
+    {
+      "date": "2026-09-11",
+      "heure": "19h30",
+      "titre": "Quizz Musical",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "Teste tes connaissances en musique dans une ambiance conviviale et festive.",
+      "image": "2026-09-11.jpg"
+    },
+    {
+      "date": "2026-09-18",
+      "heure": "17h",
+      "titre": "Hotel a insectes",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "gratuit": true,
+      "description": "Fabrique un veritable hotel a insectes 5 etoiles ! Atelier parents/enfants, gratuit sur reservation.",
+      "image": "2026-09-18a.jpg"
+    },
+    {
+      "date": "2026-09-18",
+      "heure": "21h",
+      "titre": "Cine club : Le Cochon de Gaza",
+      "type": "Cine",
+      "lieu": "Le Tinal",
+      "description": "Jafaar, pecheur de Gaza, remonte un cochon dans ses filets et se lance dans un commerce rocambolesque."
+    },
+    {
+      "date": "2026-09-25",
+      "heure": "20h",
+      "titre": "Marty",
+      "type": "Concert",
+      "lieu": "Le Tinal",
+      "prix": "Participation libre",
+      "description": "Multi-instrumentiste ayant accompagne Olivia Ruiz : folk a la guitare, banjo, mandoline, weissenborn.",
+      "image": "2026-09-25.jpg"
+    },
+    {
+      "date": "2026-09-26",
+      "titre": "Les Huiles essentielles",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "gratuit": true,
+      "description": "Decouvre les bienfaits des huiles essentielles et repars avec ton stick inhalateur. Sur reservation.",
+      "image": "2026-09-26.jpg"
+    },
+    {
+      "date": "2026-10-02",
+      "titre": "Vernissage / Serigraphie",
+      "type": "Vernissage",
+      "lieu": "Le Tinal",
+      "prix": "Des 5 €",
+      "description": "Apporte ton T-shirt pour une impression en direct par Stefania, qui expose en binome avec Lea Muller."
+    },
+    {
+      "date": "2026-10-03",
+      "heure": "10h",
+      "titre": "Atelier arts plastiques",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Dessin multitechnique avec Lea Muller (10h-12h) puis reliure / creation de carnet (14h-16h)."
+    },
+    {
+      "date": "2026-10-09",
+      "titre": "Degustation de sake",
+      "type": "Degustation",
+      "lieu": "Le Tinal",
+      "description": "Decouvre le sake brasse en Occitanie selon les recettes japonaises ancestrales, avec Azerou Sake.",
+      "image": "2026-10-09a.jpg"
+    },
+    {
+      "date": "2026-10-16",
+      "titre": "Karaoke",
+      "type": "Karaoke",
+      "lieu": "Le Tinal",
+      "description": "Un piano, un pianiste, une liste de chansons francaises et pas francaises affichees en grand pour tous.",
+      "image": "2026-10-16.jpg"
+    },
+    {
+      "date": "2026-10-17",
+      "heure": "10h",
+      "titre": "Atelier tisanes",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Initie-toi aux plantes medicinales et repars avec ton propre melange. Sur reservation.",
+      "image": "2026-10-17.jpg"
+    },
+    {
+      "date": "2026-10-23",
+      "titre": "Soiree jeux",
+      "type": "Jeux",
+      "lieu": "Le Tinal",
+      "description": "",
+      "image": "2026-10-23.jpg"
+    },
+    {
+      "date": "2026-10-23",
+      "heure": "21h",
+      "titre": "Cine club : The Big Lebowski",
+      "type": "Cine",
+      "lieu": "Le Tinal",
+      "description": "",
+      "image": "2026-10-09b.jpg"
+    },
+    {
+      "date": "2026-10-30",
+      "heure": "18h",
+      "titre": "Atelier savons",
+      "type": "Atelier",
+      "lieu": "Le Tinal",
+      "description": "Saponification a froid, savon de Castille : viens avec ton moule et Marc te guidera. Sur reservation.",
+      "image": "2026-10-30.jpg"
+    },
+    {
+      "date": "2026-10-31",
+      "titre": "Fete de la soupe",
+      "type": "Rencontre",
+      "lieu": "Le Tinal",
+      "description": "3e edition : reviens avec ta marmite et ta recette secrete... Soiree de cloture de la saison 2026 !",
+      "image": "2026-10-31.jpg"
+    }
+  ]
+}

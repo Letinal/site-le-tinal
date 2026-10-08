@@ -1,0 +1,24 @@
+DOSSIER « AMBIANCE » — PHOTOS DE LA PAGE D'ACCUEIL
+===================================================
+
+Les photos de la galerie « L'ambiance du Tinal » (page d'accueil)
+sont TOUTES rangées dans ce dossier.
+
+POUR CHANGER LES PHOTOS
+-----------------------
+- Il suffit d'ajouter, de retirer ou de remplacer des images ICI.
+- Formats acceptés : .jpg .jpeg .png .webp
+- Les photos s'affichent automatiquement, dans l'ordre alphabétique
+  du nom de fichier (galerie-1, galerie-2, galerie-3 ...).
+- Pour changer l'ordre, renommez les fichiers (galerie-1.jpg passe
+  en premier, etc.).
+- Il n'y a AUCUN autre fichier à modifier : la page se met à jour
+  toute seule au prochain « mettre en ligne ».
+
+CONSEILS
+--------
+- Idéalement 9 photos (grille de 3 x 3), mais le nombre est libre.
+- Photos au format paysage de préférence, largeur ~1200 px, < 300 Ko
+  chacune (pour un site rapide). Un simple export « web » convient.
+
+Ne pas supprimer ce fichier _LISEZ-MOI.txt.

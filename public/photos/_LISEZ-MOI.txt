@@ -1,0 +1,3 @@
+Déposez ici les photos du site (JPG ou PNG).
+Elles seront accessibles sur le site à l'adresse /photos/nom-du-fichier.jpg
+Conseil : nommez-les simplement, sans espaces ni accents (ex: hero-cafe.jpg, concert-2025.jpg).

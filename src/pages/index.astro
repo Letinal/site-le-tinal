@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import prog from '../data/programme.json';
+const moisCourt = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+const aujourdhui = new Date().toISOString().slice(0,10);
+const prochains = prog.evenements.filter(e => e.date >= aujourdhui).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
+const liste = prochains.length ? prochains : [...prog.evenements].sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
+const jour = (d)=> new Date(d).getDate();
+const mois = (d)=> moisCourt[new Date(d).getMonth()];
+const couleurType = (t='')=>{const s=t.toLowerCase();
+  if(s.includes('festival')) return 't-magenta';
+  if(s.includes('concert')||s.includes('musi')||s.includes('chorale')||s.includes('bluegrass')||s.includes('swing')||s.includes('danse')) return 't-coral';
+  if(s.includes('spectacle')||s.includes('clown')||s.includes('théât')) return 't-turquoise';
+  if(s.includes('conte')) return 't-jaune';
+  if(s.includes('verniss')||s.includes('expo')||s.includes('sérigraph')||s.includes('serigraph')||s.includes('art')||s.includes('ciné')||s.includes('cine')) return 't-violet';
+  if(s.includes('jeu')||s.includes('quizz')||s.includes('karaok')||s.includes('mario')||s.includes('puzzle')||s.includes('march')||s.includes('dégust')||s.includes('degust')) return 't-jaune';
+  return 't-vert';};
+// Galerie « ambiance » : le bureau dépose/remplace librement les photos
+// dans public/photos/ambiance/ — elles s'affichent automatiquement (voir _LISEZ-MOI.txt).
+import fs from 'node:fs';
+const ambianceDir = 'public/photos/ambiance';
+const galerie = fs.existsSync(ambianceDir)
+  ? fs.readdirSync(ambianceDir)
+      .filter(f => /\.(jpe?g|png|webp|avif)$/i.test(f))
+      .sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}))
+  : [];
+// Coordonnees GPS exactes du Tinal (fiche Google du lieu) — pin cale sur le batiment
+const mapCoords = "43.2875863,2.9715322";
+const telBrut = site.telephone.replace(/\s/g,'');
+---
+<Base>
+  <section class="hero">
+    <div class="contenu">
+      <span class="eyebrow">{site.saisonLabel} {prog.annee}</span>
+      <h1>{site.nom}, la culture au cœur du village</h1>
+      <p class="baseline">{site.objet}</p>
+      <div class="actions">
+        <a class="bouton" href="/adherer">Adhérer en ligne</a>
+        <a class="bouton secondaire" href="/programme">Voir le programme</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contenu">
+      <span class="eyebrow">À l'affiche</span>
+      <h2>Les prochains rendez-vous</h2>
+      {liste.map(e => (
+        <article class={`evt ${couleurType(e.type)}`}>
+          <div class="cal"><div class="j">{jour(e.date)}</div><div class="m">{mois(e.date)}</div></div>
+          <div>
+            {e.image && <img class="evt-img" src={`/photos/events/${e.image}`} alt={e.titre} loading="lazy" />}
+            <h3>{e.titre}{e.gratuit && <span class="badge gratuit">Gratuit</span>}</h3>
+            <div class="meta">{[e.type, e.heure, e.lieu].filter(Boolean).join(" · ")}</div>
+            {e.description && <p>{e.description}</p>}
+          </div>
+        </article>
+      ))}
+      <p style="margin-top:20px"><a class="bouton secondaire" href="/programme">Toute la saison &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="contenu">
+      <span class="eyebrow">En images</span>
+      <h2>L'ambiance du Tinal</h2>
+      <div class="galerie">
+        {galerie.map(f => <img src={`/photos/ambiance/${f}`} alt="L'ambiance au Tinal" loading="lazy" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="contenu">
+      <div class="cartes">
+        <div class="carte c1"><h3>Un café associatif</h3><p>{site.objet}</p></div>
+        <div class="carte c2"><h3>Devenir adhérent</h3><p>{site.cotisationTexte} Adhésion à montant libre.</p><a class="bouton" href="/adherer">Adhérer</a></div>
+        <div class="carte c3"><h3>Nous trouver</h3><p>{site.adresse}</p><p><a href={site.instagram} target="_blank" rel="noopener"><strong>Suivez-nous sur Instagram</strong></a> · <a href={site.facebook} target="_blank" rel="noopener">Facebook</a></p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0" id="acces">
+    <div class="contenu">
+      <span class="eyebrow">Accès</span>
+      <h2>Venir au Tinal</h2>
+      <div class="acces">
+        <div class="map-wrap">
+          <iframe class="map-embed" title="Carte — Le Tinal, Ouveillan"
+            src={`https://www.google.com/maps?q=${mapCoords}&z=17&hl=fr&output=embed`}
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <div class="acces-info carte">
+          <h3>Le Tinal d'Ouveillan</h3>
+          <p class="adr">{site.adresse}</p>
+          <p class="horaires">Café associatif ouvert les vendredis en saison (mai&nbsp;→&nbsp;octobre)</p>
+          <div class="itineraire">
+            <a class="bouton" target="_blank" rel="noopener"
+               href={`https://www.google.com/maps/dir/?api=1&destination=${mapCoords}`}>Itinéraire</a>
+            <a class="bouton secondaire" target="_blank" rel="noopener"
+               href={`https://waze.com/ul?ll=${mapCoords}&navigate=yes`}>Waze</a>
+          </div>
+          <p class="tel">Tél. <a href={`tel:${telBrut}`}>{site.telephone}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+const { title, description, admin = false } = Astro.props;
+const titreComplet = title ? `${title} — ${site.nom}` : `${site.nomComplet} — ${site.baseline}`;
+const desc = description ?? site.objet;
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{titreComplet}</title>
+  <meta name="description" content={desc} />
+  <meta name="theme-color" content="#e0a63a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Ruda:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta property="og:title" content={titreComplet} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  {!admin && <Header />}
+  <main>
+    <slot />
+  </main>
+  {!admin && <Footer />}
+  <script>
+    (function(){
+      if (!("serviceWorker" in navigator)) return;
+      var local = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+      if (local) {
+        navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});
+        if (window.caches) caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});
+      } else {
+        window.addEventListener("load", function(){ navigator.serviceWorker.register("/sw.js").catch(function(){}); });
+      }
+    })();
+  </script>
+</body>
+</html>

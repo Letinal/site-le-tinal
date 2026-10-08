@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+const concerts = Array.from({length:11}, (_,i)=> String(i+1).padStart(2,'0'));
+---
+<Base title="Concerts" description="Les concerts de la saison 2026 au Tinal, café associatif d'Ouveillan.">
+  <section class="section" style="padding-top:52px">
+    <div class="contenu">
+      <span class="eyebrow">Saison 2026</span>
+      <h1>Concerts</h1>
+      <p style="color:var(--ink);max-width:62ch">La programmation musicale du Tinal, au cœur du village. <strong>Cliquez sur une affiche pour l'agrandir</strong> — vous pourrez ensuite la télécharger.</p>
+      <div class="affiches">
+        {concerts.map(n => (
+          <a class="affiche js-lb" href={`/concerts/concert-${n}.jpg`} data-dl={`Le-Tinal-concert-${n}.jpg`} title="Agrandir">
+            <img src={`/concerts/concert-${n}.jpg`} alt={`Concert ${n} — Le Tinal 2026`} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lb" id="lb" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Fermer">&times;</button>
+    <div class="lb-inner">
+      <img id="lbImg" src="" alt="Affiche concert" />
+      <a class="bouton" id="lbDl" href="" download>Télécharger cette affiche</a>
+    </div>
+  </div>
+
+  <script is:inline>
+    const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbDl=document.getElementById('lbDl');
+    document.querySelectorAll('.js-lb').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        var href=a.getAttribute('href');
+        lbImg.src=href; lbDl.setAttribute('href',href); lbDl.setAttribute('download', a.getAttribute('data-dl')||'');
+        lb.classList.add('on');
+      });
+    });
+    function fermer(){ lb.classList.remove('on'); }
+    document.getElementById('lbClose').addEventListener('click', fermer);
+    lb.addEventListener('click', function(e){ if(e.target===lb) fermer(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermer(); });
+  </script>
+</Base>

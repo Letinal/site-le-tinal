@@ -1,0 +1,24 @@
+---
+const path = Astro.url.pathname;
+const est = (p) => (path === p || (p !== '/' && path.startsWith(p))) ? 'page' : undefined;
+---
+<header class="site-header">
+  <div class="contenu">
+    <a class="marque" href="/" aria-label="Le Tinal d'Ouveillan, accueil">
+      <img class="logo-img" src="/logo-tinal.png" alt="Le Tinal — Ouveillan" width="640" height="438" />
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" id="burger">&#9776;</button>
+    <nav class="menu" id="menu" aria-label="Navigation principale">
+      <a href="/" aria-current={est('/')}>Accueil</a>
+      <a href="/programme" aria-current={est('/programme')}>Programme</a>
+      <a href="/concerts" aria-current={est('/concerts')}>Concerts</a>
+      <a href="/association" aria-current={est('/association')}>L'association</a>
+      <a class="cta" href="/adherer" aria-current={est('/adherer')}>Adhérer</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const b = document.getElementById('burger');
+  const m = document.getElementById('menu');
+  b?.addEventListener('click', () => { const o = m.classList.toggle('ouvert'); b.setAttribute('aria-expanded', String(o)); });
+</script>

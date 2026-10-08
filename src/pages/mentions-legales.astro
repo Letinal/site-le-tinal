@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="Mentions légales">
+  <section class="section" style="padding-top:52px">
+    <div class="contenu" style="max-width:760px">
+      <h1>Mentions légales</h1>
+
+      <h2>Éditeur</h2>
+      <p>{site.nomComplet} — {site.loi1901}.<br/>Siège social&nbsp;: {site.adresse}.<br/>Contact&nbsp;: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Hébergement</h2>
+      <p>Site hébergé par Cloudflare, Inc. (101 Townsend St, San Francisco, CA, USA).</p>
+
+      <h2>Adhésion et paiement</h2>
+      <p>Les adhésions et leur paiement sont gérés par <strong>HelloAsso</strong>, qui délivre les reçus. L'association ne conserve aucune donnée bancaire.</p>
+
+      <h2>Café associatif — consommation sur place</h2>
+      <p>Le Tinal est un café associatif. Conformément à la réglementation applicable aux associations, <strong>la consommation de boissons (alcoolisées comprises) et de nourriture est strictement réservée aux membres adhérents</strong> de l'association, à jour de leur cotisation. L'adhésion est donc obligatoire pour consommer sur place (boissons et nourriture).</p>
+
+      <h2>Données personnelles (RGPD)</h2>
+      <p>Les informations recueillies lors de l'adhésion (via HelloAsso) servent uniquement à la gestion des adhésions et à l'information des adhérents. Elles ne sont ni cédées ni vendues. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression&nbsp;: adressez votre demande à <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

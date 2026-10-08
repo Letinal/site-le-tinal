@@ -1,0 +1,30 @@
+---
+import site from '../data/site.json';
+const telHref = 'tel:+' + (site.whatsapp?.replace(/\D/g, '') || '');
+---
+<footer class="site-footer">
+  <div class="contenu">
+    <div class="cols">
+      <div>
+        <h4>{site.nomComplet}</h4>
+        <p>{site.objet}</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>
+          {site.adresse}<br/>
+          {site.telephone && <><a href={telHref}>{site.telephone}</a> · <a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a><br/></>}
+          <a href={site.instagram} target="_blank" rel="noopener"><strong>Instagram</strong></a> · <a href={site.facebook} target="_blank" rel="noopener">Facebook</a>
+        </p>
+      </div>
+      <div>
+        <h4>Adhérer</h4>
+        <p>Rejoignez l'association — adhésion à montant libre — et faites vivre la culture au village.</p>
+        <a class="bouton" href="/adherer">Devenir adhérent</a>
+      </div>
+    </div>
+    <div class="bas">
+      {site.loi1901} · <a href="/mentions-legales">Mentions légales</a> · &copy; {new Date().getFullYear()} {site.nomComplet}
+    </div>
+  </div>
+</footer>

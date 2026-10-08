@@ -1,0 +1,247 @@
+/* Le Tinal — thème clair, festif et coloré (esprit "Les Bois d'Arthur", version gaie) */
+:root{
+  --cream:#fff8ef; --cream2:#fdefdd; --card:#ffffff;
+  --ink:#2a2233; --muted:#7c7288; --line:#f0e3d2; --bord-champ:#e4d3bd;
+
+  --coral:#ff6a3d; --coral-d:#ef4f22;
+  --turquoise:#12b3ac; --jaune:#ffbe2e; --magenta:#e5468a; --violet:#8b5cf6; --vert:#37b26a;
+
+  --accent:var(--coral);
+  --ok:#2f9e5f; --alerte:#e0483a;
+  --max:1160px; --r:16px; --shadow:0 14px 40px rgba(60,30,10,.10); --shadow-h:0 20px 48px rgba(60,30,10,.16);
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --serif:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--coral-d);text-decoration:none}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;color:var(--ink)}
+h1{font-size:clamp(2.4rem,6vw,4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,4vw,2.6rem)}
+h3{font-size:1.3rem}
+.contenu{max-width:var(--max);margin:0 auto;padding:0 24px}
+.eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px}
+
+/* Boutons pilule */
+.bouton{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;font-size:.82rem;
+  letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:.25s;border:2px solid transparent;
+  background:linear-gradient(135deg,var(--coral),#ff9a3d);color:#fff;box-shadow:0 8px 20px rgba(255,106,61,.28)}
+.bouton:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(255,106,61,.38)}
+.bouton:active{transform:translateY(0)}
+.bouton.secondaire{background:transparent;color:var(--ink);border-color:var(--line);box-shadow:none}
+.bouton.secondaire:hover{border-color:var(--coral);color:var(--coral-d);transform:translateY(-2px)}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,248,239,.82);border-bottom:1px solid var(--line)}
+.site-header .contenu{display:flex;align-items:center;gap:16px;height:72px;position:relative}
+.marque{display:flex;align-items:center;gap:12px}
+.marque .logo{width:44px;height:44px;flex:none}
+.marque .nom{font-family:var(--serif);font-size:1.35rem;font-weight:700;line-height:1;color:var(--ink)}
+.marque .lieu{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--coral-d);margin-top:3px}
+nav.menu{margin-left:auto;display:flex;gap:26px;align-items:center}
+nav.menu a{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:600;position:relative;transition:.2s}
+nav.menu a:hover,nav.menu a[aria-current="page"]{color:var(--coral-d)}
+nav.menu a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:3px;border-radius:3px;background:var(--coral)}
+nav.menu a.cta{padding:9px 18px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--magenta),var(--violet));text-transform:uppercase}
+nav.menu a.cta::after{display:none}
+nav.menu a.cta:hover{color:#fff;transform:translateY(-1px)}
+.burger{display:none;margin-left:auto;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+
+/* Hero festif */
+.hero{position:relative;color:#fff;overflow:hidden;
+  background:linear-gradient(125deg,var(--coral) 0%,var(--magenta) 52%,var(--violet) 100%)}
+.hero::after{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:radial-gradient(60% 80% at 82% 20%,rgba(255,190,46,.55),transparent 55%),radial-gradient(50% 70% at 10% 90%,rgba(18,179,172,.5),transparent 55%)}
+.hero .contenu{position:relative;z-index:1;padding:82px 24px}
+.hero .eyebrow{color:rgba(255,255,255,.92)}
+.hero h1{color:#fff;max-width:16ch;text-shadow:0 2px 24px rgba(80,20,60,.25)}
+.hero .baseline{font-size:1.14rem;max-width:56ch;margin-top:18px;color:rgba(255,255,255,.95)}
+.hero .actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.hero .bouton{background:#fff;color:var(--coral-d);box-shadow:0 10px 26px rgba(60,20,50,.28)}
+.hero .bouton:hover{transform:translateY(-2px)}
+.hero .bouton.secondaire{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.6)}
+.hero .bouton.secondaire:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* Sections */
+.section{padding:64px 0}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;box-shadow:var(--shadow);transition:.3s;position:relative;overflow:hidden}
+.carte::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+.carte:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
+.carte h3{margin-bottom:8px}
+.carte p{color:var(--muted);font-size:.96rem;margin-bottom:12px}
+.carte.c1{--accent:var(--coral)} .carte.c2{--accent:var(--turquoise)} .carte.c3{--accent:var(--violet)}
+
+/* Programme — événements colorés par type */
+.evt{display:grid;grid-template-columns:96px 1fr;gap:20px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow);align-items:center;transition:.3s;border-left:6px solid var(--accent)}
+.evt:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.evt .cal{text-align:center;border-radius:14px;padding:12px 6px;color:#fff;background:linear-gradient(150deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#000 6%))}
+.evt .cal .j{font-family:var(--serif);font-size:1.9rem;font-weight:700;line-height:1}
+.evt .cal .m{text-transform:uppercase;font-size:.72rem;letter-spacing:.12em;opacity:.95;margin-top:2px}
+.evt h3{margin:0 0 5px}
+.evt .meta{color:var(--muted);font-size:.9rem;margin-bottom:6px}
+.evt p{color:var(--ink);margin:0}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:3px 11px;border-radius:999px;color:#fff;background:var(--accent);margin-left:8px;vertical-align:middle}
+.badge.gratuit{background:var(--vert)}
+/* accents par type */
+.t-coral{--accent:var(--coral)} .t-turquoise{--accent:var(--turquoise)} .t-jaune{--accent:var(--jaune)}
+.t-magenta{--accent:var(--magenta)} .t-violet{--accent:var(--violet)} .t-vert{--accent:var(--vert)}
+.t-jaune .cal{color:#5a3d00}
+
+/* Formulaire */
+form.adhesion{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px;box-shadow:var(--shadow);max-width:660px}
+.champ{margin-bottom:18px}
+.champ label{display:block;font-weight:600;margin-bottom:6px}
+.champ input,.champ select,.champ textarea{width:100%;padding:12px 14px;border:1px solid var(--bord-champ);border-radius:12px;font-size:1rem;font-family:inherit;background:#fffdf9}
+.champ input:focus,.champ select:focus,.champ textarea:focus{outline:2px solid var(--coral);border-color:var(--coral)}
+.ligne2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:auto;margin-top:5px}
+.aide{font-size:.85rem;color:var(--muted)}
+.encart{background:linear-gradient(135deg,var(--cream2),#fff3e6);border:1px solid var(--line);border-left:5px solid var(--jaune);border-radius:14px;padding:16px 18px;margin:22px 0}
+
+/* Tableau admin */
+table.inscrits{width:100%;border-collapse:collapse;background:var(--card);font-size:.9rem}
+table.inscrits th,table.inscrits td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+table.inscrits th{background:var(--cream2);position:sticky;top:0}
+.pill{font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:999px}
+.pill.paye{background:#dcf5e6;color:var(--ok)} .pill.a_regler{background:#fde9c6;color:#9a6a12} .pill.annule{background:#f7d9d5;color:var(--alerte)}
+.barre-outils{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+
+/* Footer */
+.site-footer{background:linear-gradient(135deg,#2a2233,#3a2740);color:#efe7ea;margin-top:56px;padding:52px 0 30px}
+.site-footer a{color:#fff}
+.site-footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+.site-footer h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:10px;color:#fff}
+.site-footer p{color:#d8ccd4;font-size:.95rem}
+.site-footer .bouton{background:linear-gradient(135deg,var(--jaune),var(--coral));color:#3a2740}
+.site-footer .bas{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);font-size:.85rem;opacity:.8;text-align:center}
+
+@media(max-width:760px){
+  nav.menu{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--cream);border-bottom:1px solid var(--line);padding:12px;gap:6px;box-shadow:var(--shadow)}
+  nav.menu.ouvert{display:flex}
+  nav.menu a{width:100%;padding:8px 4px}
+  .burger{display:block}
+  .ligne2{grid-template-columns:1fr}
+  .evt{grid-template-columns:76px 1fr;gap:14px}
+}
+
+/* --- Photos (premier jet) --- */
+.hero{background:linear-gradient(125deg,rgba(255,106,61,.86),rgba(229,70,138,.70) 52%,rgba(139,92,246,.82)),url(/photos/hero.jpg);background-size:cover;background-position:center}
+.galerie{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.galerie img{width:100%;height:240px;object-fit:cover;border-radius:14px;box-shadow:var(--shadow);transition:.3s}
+.galerie img:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.banniere{width:100%;height:300px;object-fit:cover;object-position:center;border-radius:16px;box-shadow:var(--shadow);margin-bottom:24px}
+@media(max-width:760px){.galerie{grid-template-columns:1fr 1fr}.galerie img{height:170px}.banniere{height:200px}}
+
+/* Héros : photo nette, sans voile de couleur (ombre de texte neutre pour la lisibilité) */
+.hero{background:url(/photos/hero.jpg) center 60%/cover !important}
+.hero::after{display:none !important}
+.hero h1,.hero .baseline{text-shadow:0 2px 14px rgba(0,0,0,.60),0 1px 3px rgba(0,0,0,.5)}
+.hero .eyebrow{text-shadow:0 1px 8px rgba(0,0,0,.6)}
+
+/* --- Charte Canva : typographies Baloo 2 + Nunito, en-tête blanc, logo image --- */
+:root{
+  --sans:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --serif:'Baloo 2','Nunito',system-ui,sans-serif;
+  --or:#e0a63a; --or-fonce:#b9791d;
+}
+h1,h2,h3{letter-spacing:0}
+.hero h1{font-weight:800}
+.site-header{background:#ffffff !important}
+.marque{gap:0}
+.marque .logo-img{height:54px;width:auto;display:block}
+@media(max-width:760px){.marque .logo-img{height:44px}}
+
+/* --- Charte Canva : fonds colores des blocs + ecritures noires (comme les affiches) --- */
+:root{ --ink:#17140f; }
+h1,h2,h3{ color:#17140f; }
+.hero h1{ color:#ffffff; }
+.section .eyebrow{ }
+.evt{ background:color-mix(in srgb, var(--accent) 15%, #ffffff); border:1px solid color-mix(in srgb, var(--accent) 34%, #ffffff); border-left:7px solid var(--accent); }
+.evt h3, .evt p{ color:#17140f; }
+.evt .meta{ color:#17140f; opacity:.72; }
+.carte{ background:color-mix(in srgb, var(--accent) 12%, #ffffff); }
+.carte h3{ color:#17140f; }
+.carte p{ color:#3a352c; }
+
+/* === Couleurs OFFICIELLES tirees du Canva (affiches Le Tinal 2026) === */
+:root{
+  --turquoise:#217686; --vert:#4e9a2f; --jaune:#e6bf49; --orange:#d17e1b;
+  --coral:#e1525e; --coral-d:#c93b46; --magenta:#e0468a; --violet:#a16ae8;
+  --mint:#8ccbba; --vertvif:#52d41b; --ink:#141210;
+}
+.t-coral{--accent:#e1525e} .t-magenta{--accent:#e0468a} .t-turquoise{--accent:#217686}
+.t-jaune{--accent:#e6bf49} .t-violet{--accent:#a16ae8} .t-vert{--accent:#4e9a2f} .t-orange{--accent:#d17e1b}
+h1,h2,h3{ color:#141210; }
+.hero h1{ color:#ffffff; }
+.evt{ background:color-mix(in srgb, var(--accent) 20%, #ffffff); border:1px solid color-mix(in srgb, var(--accent) 42%, #ffffff); border-left:7px solid var(--accent); }
+.carte{ background:color-mix(in srgb, var(--accent) 15%, #ffffff); }
+.badge{ color:#141210; }
+.badge.gratuit{ background:var(--vertvif); color:#141210; }
+.t-jaune .cal{ color:#5a3d00; }
+.bouton{ background:#e1525e; box-shadow:0 8px 20px rgba(225,82,94,.28); }
+.bouton:hover{ background:#c93b46; }
+nav.menu a.cta{ background:#e0468a; }
+.eyebrow{ color:#217686; }
+
+/* === Typographies de la charte : Ruda (texte) + jumelle libre de Hitchcut (titres) === */
+:root{
+  --serif:'Lilita One','Baloo 2',system-ui,sans-serif;   /* titres — en attendant Hitchcut */
+  --sans:'Ruda',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+h1,h2,h3{ letter-spacing:.2px; }
+.hero h1{ font-weight:400; }
+
+/* --- Affiches (Programme / Concerts) --- */
+.affiches{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin:22px 0 8px}
+.affiche{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:.25s}
+.affiche:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.affiche img{width:100%;display:block}
+.affiche .cap{display:block;padding:9px 14px;font-family:var(--serif);font-size:1.05rem;color:#141210;text-transform:capitalize}
+
+/* Logo plus grand dans l'en-tete */
+.site-header .contenu{ height:92px; }
+.marque .logo-img{ height:72px; }
+@media(max-width:760px){ .site-header .contenu{ height:72px; } .marque .logo-img{ height:54px; } nav.menu{ top:72px; } }
+
+/* Image dans une carte du deroulé */
+.evt-img{ float:right; width:92px; height:92px; object-fit:cover; border-radius:12px; margin:0 0 8px 14px; box-shadow:0 3px 10px rgba(0,0,0,.18); }
+@media(max-width:520px){ .evt-img{ width:64px; height:64px; } }
+
+/* Bandeau page association : plus haut + recadrage pour ne pas couper le bas */
+.banniere{ height:460px; object-position:center 72%; }
+@media(max-width:760px){ .banniere{ height:300px; object-position:center 74%; } }
+
+/* Formulaire HelloAsso intégré */
+.helloasso{ width:100%; max-width:680px; margin:20px 0 8px; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); background:#fff; }
+.helloasso iframe{ width:100%; height:760px; border:0; display:block; }
+
+/* Telechargement des affiches par mois */
+.dl-affiches{ margin:16px 0 6px; }
+.dl-affiches .lbl{ display:block; font-weight:700; color:var(--ink); margin-bottom:10px; }
+.dl-mois{ display:flex; flex-wrap:wrap; gap:10px; }
+.dl-mois a{ text-transform:capitalize; }
+
+/* Lightbox affiches (clic = agrandir + proposer le telechargement) */
+.lb{ position:fixed; inset:0; background:rgba(20,15,10,.86); display:none; align-items:center; justify-content:center; z-index:200; padding:24px; }
+.lb.on{ display:flex; }
+.lb-inner{ display:flex; flex-direction:column; gap:14px; align-items:center; max-width:min(92vw,680px); }
+.lb-inner img{ max-width:100%; max-height:76vh; border-radius:12px; box-shadow:0 12px 44px rgba(0,0,0,.55); background:#fff; }
+.lb-close{ position:fixed; top:14px; right:22px; font-size:2.4rem; line-height:1; color:#fff; background:none; border:0; cursor:pointer; }
+
+/* Accès / carte "Venir au Tinal" */
+.acces{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:stretch}
+.map-wrap{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-height:360px;background:var(--cream2)}
+.map-embed{width:100%;height:100%;min-height:360px;border:0;display:block}
+.acces-info{display:flex;flex-direction:column;justify-content:center;gap:6px}
+.acces-info .adr{font-size:1.05rem;color:var(--ink);font-weight:600}
+.acces-info .horaires{color:var(--muted)}
+.acces-info .itineraire{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 6px}
+.acces-info .tel{color:var(--muted)} .acces-info .tel a{font-weight:600}
+@media(max-width:760px){.acces{grid-template-columns:1fr}.map-wrap,.map-embed{min-height:260px}}
+@media(max-width:520px){.ligne2{grid-template-columns:1fr}.acces-info .itineraire .bouton{flex:1 1 auto;justify-content:center}}
