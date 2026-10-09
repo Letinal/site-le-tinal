@@ -139,7 +139,8 @@ table.inscrits th{background:var(--cream2);position:sticky;top:0}
 @media(max-width:760px){.galerie{grid-template-columns:1fr 1fr}.galerie img{height:170px}.banniere{height:200px}}
 
 /* Héros : photo nette, sans voile de couleur (ombre de texte neutre pour la lisibilité) */
-.hero{background:url(/photos/hero.jpg) center 80%/cover !important}
+.hero{background:#2a2233 url(/photos/hero.jpg) center/100% auto no-repeat !important}
+@media(max-width:860px){.hero{background:#2a2233 url(/photos/hero.jpg) center 78%/cover no-repeat !important}}
 .hero::after{display:none !important}
 .hero h1,.hero .baseline{text-shadow:0 2px 14px rgba(0,0,0,.60),0 1px 3px rgba(0,0,0,.5)}
 .hero .eyebrow{text-shadow:0 1px 8px rgba(0,0,0,.6)}
