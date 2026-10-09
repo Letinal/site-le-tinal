@@ -11,3 +11,6 @@ node_modules/
 # os
 .DS_Store
 Thumbs.db
+_src-pdf/
+_src-photos/
+_src-affiches/
