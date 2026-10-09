@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 const concerts = Array.from({length:11}, (_,i)=> String(i+1).padStart(2,'0'));
 ---
-<Base title="Concerts" description="Les concerts de la saison 2026 au Tinal, café associatif d'Ouveillan.">
+<Base title="Concerts et spectacles" description="Les concerts de la saison 2026 au Tinal, café associatif d'Ouveillan.">
   <section class="section" style="padding-top:52px">
     <div class="contenu">
       <span class="eyebrow">Saison 2026</span>
-      <h1>Concerts</h1>
+      <h1>Concerts et spectacles</h1>
       <p style="color:var(--ink);max-width:62ch">La programmation musicale du Tinal, au cœur du village. <strong>Cliquez sur une affiche pour l'agrandir</strong> — vous pourrez ensuite la télécharger.</p>
       <div class="affiches">
         {concerts.map(n => (

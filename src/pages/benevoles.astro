@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import prog from '../data/programme.json';
+const evts = [...prog.evenements]
+  .sort((a, b) => a.date.localeCompare(b.date))
+  .map(e => ({ date: e.date, titre: e.titre, heure: e.heure || '', lieu: e.lieu || '', type: e.type || '' }));
+---
+<Base title="Espace bénévoles" description="Planning des bénévoles du Tinal — accès réservé au bureau et aux bénévoles.">
+  <section class="section" style="padding-top:52px">
+    <div class="contenu" style="max-width:880px">
+      <span class="eyebrow">Réservé au bureau &amp; aux bénévoles</span>
+      <h1>Planning des bénévoles</h1>
+
+      <div id="gate" class="gate">
+        <p>Entrez le code d'accès pour voir et compléter le planning.</p>
+        <form id="gateForm" class="gate-form">
+          <input id="code" type="password" inputmode="numeric" placeholder="Code d'accès" autocomplete="off" />
+          <button class="bouton" type="submit">Entrer</button>
+        </form>
+        <p id="gateErr" class="gate-err" hidden>Code incorrect, réessayez.</p>
+      </div>
+
+      <div id="app" hidden>
+        <div id="prochain" class="prochain"></div>
+        <h2 style="margin-top:30px">S'inscrire sur un rendez-vous</h2>
+        <p style="color:var(--muted);margin-bottom:6px">Ajoutez votre prénom sur une date pour dire que vous viendrez aider.</p>
+        <div id="liste" class="benevoles-liste"></div>
+        <p id="offline" class="gate-err" hidden style="margin-top:18px">Le planning partagé n'est pas encore activé (il le sera une fois le site en ligne).</p>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="evData" set:html={JSON.stringify(evts)}></script>
+  <script is:inline>
+    (function () {
+      var EVTS = JSON.parse(document.getElementById('evData').textContent || '[]');
+      var gate = document.getElementById('gate'), app = document.getElementById('app');
+      var codeInput = document.getElementById('code'), gateErr = document.getElementById('gateErr');
+      var code = sessionStorage.getItem('benevoles_code') || '';
+
+      function todayISO() { return new Date().toISOString().slice(0, 10); }
+      function upcoming() { var t = todayISO(); return EVTS.filter(function (e) { return e.date >= t; }); }
+      function fmt(d) { return new Date(d + 'T00:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }); }
+      function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+      function api(method, body) {
+        if (method === 'GET') return fetch('/api/benevoles?code=' + encodeURIComponent(code));
+        body.code = code;
+        return fetch('/api/benevoles', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      }
+
+      function render(data) {
+        var evs = upcoming();
+        var prochain = document.getElementById('prochain');
+        if (evs.length) {
+          var e0 = evs[0], n0 = data[e0.date] || [];
+          prochain.innerHTML = '<div class="prochain-card"><div class="pc-h">Prochain rendez-vous</div>'
+            + '<div class="pc-t">' + esc(e0.titre) + '</div>'
+            + '<div class="pc-m">' + fmt(e0.date) + (e0.heure ? ' · ' + esc(e0.heure) : '') + '</div>'
+            + '<div class="pc-lbl">Bénévoles présents (' + n0.length + ')</div>'
+            + '<div class="pc-names">' + (n0.length ? n0.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') : '<em>Personne pour l\'instant — soyez le premier&nbsp;!</em>') + '</div>'
+            + '</div>';
+        } else { prochain.innerHTML = ''; }
+
+        var liste = document.getElementById('liste');
+        liste.innerHTML = evs.map(function (e) {
+          var names = data[e.date] || [];
+          return '<div class="bev"><div class="bev-d"><div class="bev-date">' + fmt(e.date) + '</div><div class="bev-t">' + esc(e.titre) + '</div></div>'
+            + '<div class="bev-names">' + (names.length ? names.map(function (x) { return '<span class="chip">' + esc(x) + ' <button class="chip-x" data-date="' + e.date + '" data-name="' + esc(x) + '" title="Retirer">×</button></span>'; }).join('') : '<em class="vide">Aucun inscrit</em>') + '</div>'
+            + '<form class="bev-add" data-date="' + e.date + '"><input placeholder="Votre prénom" maxlength="40" autocomplete="off" /><button class="bouton secondaire" type="submit">+ Je viens</button></form>'
+            + '</div>';
+        }).join('');
+        wire();
+      }
+
+      function wire() {
+        document.querySelectorAll('.bev-add').forEach(function (f) {
+          f.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var inp = f.querySelector('input'), name = inp.value.trim();
+            if (!name) return;
+            api('POST', { action: 'add', date: f.getAttribute('data-date'), name: name }).then(function (r) {
+              if (r.status === 401) { logout(); return; }
+              if (r.ok) r.json().then(function (j) { render(j.data); });
+            });
+          });
+        });
+        document.querySelectorAll('.chip-x').forEach(function (b) {
+          b.addEventListener('click', function () {
+            api('POST', { action: 'remove', date: b.getAttribute('data-date'), name: b.getAttribute('data-name') }).then(function (r) {
+              if (r.status === 401) { logout(); return; }
+              if (r.ok) r.json().then(function (j) { render(j.data); });
+            });
+          });
+        });
+      }
+
+      function load() {
+        return api('GET').then(function (r) {
+          if (r.status === 401) { logout(); return false; }
+          if (r.ok) return r.json().then(function (j) { gate.hidden = true; app.hidden = false; document.getElementById('offline').hidden = true; render(j.data); return true; });
+          // endpoint injoignable (ex. local sans backend) : on ouvre quand meme en lecture vide
+          gate.hidden = true; app.hidden = false; document.getElementById('offline').hidden = false; render({});
+          return true;
+        }).catch(function () {
+          gate.hidden = true; app.hidden = false; document.getElementById('offline').hidden = false; render({});
+          return true;
+        });
+      }
+      function logout() { sessionStorage.removeItem('benevoles_code'); code = ''; app.hidden = true; gate.hidden = false; }
+
+      document.getElementById('gateForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        code = codeInput.value.trim(); gateErr.hidden = true;
+        api('GET').then(function (r) {
+          if (r.status === 401) { gateErr.hidden = false; code = ''; return; }
+          sessionStorage.setItem('benevoles_code', code);
+          load();
+        }).catch(function () { sessionStorage.setItem('benevoles_code', code); load(); });
+      });
+
+      if (code) { load(); }
+    })();
+  </script>
+</Base>

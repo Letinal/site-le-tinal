@@ -1,3 +1,12 @@
 # Cloudflare Pages — site statique Le Tinal
 name = "le-tinal"
 pages_build_output_dir = "./dist"
+
+# Stockage partage du planning des benevoles (Cloudflare KV).
+# En LOCAL (npm run dev) : fonctionne tel quel (base locale simulee).
+# En PRODUCTION : creer un namespace KV dans Cloudflare (Workers & Pages >
+#   KV) nomme "benevoles", puis le lier au projet Pages :
+#   Settings > Bindings > KV > Variable = BENEVOLES. (ou coller son id ci-dessous)
+[[kv_namespaces]]
+binding = "BENEVOLES"
+id = "benevoles-local"

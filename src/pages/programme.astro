@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import site from '../data/site.json';
 import prog from '../data/programme.json';
-const evts = [...prog.evenements].sort((a,b)=>a.date.localeCompare(b.date));
+const evts = [...prog.evenements].sort((a,b)=>b.date.localeCompare(a.date));
 const moisCourt = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 const jour = (d)=> new Date(d).getDate();
 const mois = (d)=> moisCourt[new Date(d).getMonth()];
@@ -24,9 +24,14 @@ const affiches = [['mai','Mai'],['juin','Juin'],['juillet','Juillet'],['aout','A
       <h1>Programme {prog.annee}</h1>
       <p style="color:var(--ink);max-width:62ch">Le détail de toute la saison ci-dessous. Le Tinal est ouvert tous les vendredis. L'accès au café associatif (boissons et restauration) est réservé aux <a href="/adherer">adhérents</a>.</p>
       <div class="dl-affiches">
-        <span class="lbl">Télécharger les affiches (une par mois, PDF)</span>
-        <div class="dl-mois">
-          {affiches.map(([f,label]) => <a class="bouton secondaire" href={`/affiches/affiche-${f}.pdf`} download>{label}</a>)}
+        <span class="lbl">Les affiches de la saison — <strong>cliquez pour agrandir</strong>, puis téléchargez</span>
+        <div class="affiches affiches-mini">
+          {affiches.map(([f,label]) => (
+            <a class="affiche js-lb" href={`/affiches/affiche-${f}.jpg`} data-dl={`/affiches/affiche-${f}.pdf`} data-name={`Affiche-${label}-Le-Tinal.pdf`} title={`Affiche ${label} — agrandir`}>
+              <img src={`/affiches/affiche-${f}.jpg`} alt={`Affiche ${label} — Le Tinal`} loading="lazy" />
+              <span class="affiche-lbl">{label}</span>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -49,4 +54,28 @@ const affiches = [['mai','Mai'],['juin','Juin'],['juillet','Juillet'],['aout','A
       </div>
     </div>
   </section>
+  <div class="lb" id="lb" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Fermer">&times;</button>
+    <div class="lb-inner">
+      <img id="lbImg" src="" alt="Affiche du mois" />
+      <a class="bouton" id="lbDl" href="" download>Télécharger cette affiche (PDF)</a>
+    </div>
+  </div>
+
+  <script is:inline>
+    const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbDl=document.getElementById('lbDl');
+    document.querySelectorAll('.js-lb').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        lbImg.src=a.getAttribute('href');
+        lbDl.setAttribute('href', a.getAttribute('data-dl')||a.getAttribute('href'));
+        lbDl.setAttribute('download', a.getAttribute('data-name')||'');
+        lb.classList.add('on');
+      });
+    });
+    function fermer(){ lb.classList.remove('on'); }
+    document.getElementById('lbClose').addEventListener('click', fermer);
+    lb.addEventListener('click', function(e){ if(e.target===lb) fermer(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermer(); });
+  </script>
 </Base>

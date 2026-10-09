@@ -1,5 +1,10 @@
 ---
 import site from '../data/site.json';
+import fs from 'node:fs';
+const partDir = 'public/partenaires';
+const partenaires = fs.existsSync(partDir)
+  ? fs.readdirSync(partDir).filter(x=>/\.(png|jpe?g|svg|webp)$/i.test(x)).sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}))
+  : [];
 const telHref = 'tel:+' + (site.whatsapp?.replace(/\D/g, '') || '');
 ---
 <footer class="site-footer">
@@ -23,6 +28,14 @@ const telHref = 'tel:+' + (site.whatsapp?.replace(/\D/g, '') || '');
         <a class="bouton" href="/adherer">Devenir adhérent</a>
       </div>
     </div>
+    {partenaires.length > 0 && (
+      <div class="partenaires">
+        <h4>Avec le soutien de</h4>
+        <div class="partenaires-logos">
+          {partenaires.map(p => <img src={`/partenaires/${p}`} alt="Partenaire du Tinal" loading="lazy" />)}
+        </div>
+      </div>
+    )}
     <div class="bas">
       {site.loi1901} · <a href="/mentions-legales">Mentions légales</a> · &copy; {new Date().getFullYear()} {site.nomComplet}
     </div>

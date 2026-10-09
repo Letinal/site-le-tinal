@@ -1,0 +1,27 @@
+DOSSIER « PARTENAIRES » — LOGOS DU BAS DE PAGE
+================================================
+
+Les logos affichés en bas de toutes les pages (« Avec le soutien de »)
+sont rangés ICI. Ils s'affichent automatiquement, dans l'ordre
+alphabetique du nom de fichier (1-..., 2-..., 3-...).
+
+POUR AJOUTER / CHANGER UN LOGO
+------------------------------
+- Depose simplement le fichier image dans ce dossier.
+- Formats : .png (de preference avec fond transparent), .jpg, .svg, .webp
+- Pour l'ordre : renomme avec un chiffre au debut (1-, 2-, 3- ...).
+- Pour retirer un logo : supprime son fichier.
+
+>>> Le logo du BRASSEUR : depose-le ici (ex. « 6-brasseur.png »).
+
+IMPORTANT — qualite
+-------------------
+Les logos presents ont ete extraits de l'affiche : ils depannent mais
+sont en basse definition. Remplace-les par les versions officielles
+(les partenaires fournissent des logos PNG/SVG propres) :
+  - Departement de l'Aude
+  - CAF de l'Aude
+  - Mairie d'Ouveillan (blason)
+  - Grand Narbonne / Budget citoyen
+
+Ne pas supprimer ce fichier _LISEZ-MOI.txt.

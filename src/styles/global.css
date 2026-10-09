@@ -245,3 +245,43 @@ h1,h2,h3{ letter-spacing:.2px; }
 .acces-info .tel{color:var(--muted)} .acces-info .tel a{font-weight:600}
 @media(max-width:760px){.acces{grid-template-columns:1fr}.map-wrap,.map-embed{min-height:260px}}
 @media(max-width:520px){.ligne2{grid-template-columns:1fr}.acces-info .itineraire .bouton{flex:1 1 auto;justify-content:center}}
+
+/* ===== Logo bandeau : agrandi + debordant un peu vers le bas ===== */
+.site-header{ overflow: visible; }
+.marque{ position: relative; z-index: 3; }
+.marque .logo-img{ height:108px; width:auto; display:block; margin:0 6px -22px 0; transform:translateY(4px); }
+@media(max-width:760px){ .marque .logo-img{ height:76px; margin:0 0 -14px; } }
+
+/* ===== Affiches programme : vignettes cliquables (lightbox) ===== */
+.affiches-mini{ grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap:14px; }
+.affiches-mini .affiche{ position:relative; cursor:zoom-in; }
+.affiche-lbl{ position:absolute; left:8px; bottom:8px; background:rgba(20,18,16,.80); color:#fff; font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+
+/* ===== Partenaires (pied de page) ===== */
+.partenaires{ margin-top:30px; padding-top:24px; border-top:1px solid rgba(255,255,255,.16); text-align:center; }
+.partenaires h4{ font-family:var(--sans); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:#cbbfd0; margin-bottom:16px; }
+.partenaires-logos{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:center; }
+.partenaires-logos img{ height:46px; width:auto; max-width:160px; object-fit:contain; background:#fff; border-radius:10px; padding:8px 12px; box-shadow:0 3px 10px rgba(0,0,0,.14); }
+
+/* ===== Espace benevoles (planning) ===== */
+.gate{ background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:26px; box-shadow:var(--shadow); max-width:460px; margin-top:18px; }
+.gate-form{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+.gate-form input{ flex:1; min-width:160px; padding:12px 14px; border:1px solid var(--bord-champ); border-radius:12px; font-size:1rem; }
+.gate-err{ color:var(--alerte); font-weight:600; margin-top:10px; }
+.prochain-card{ background:linear-gradient(135deg,var(--coral),#ff9a3d); color:#fff; border-radius:var(--r); padding:24px 26px; box-shadow:var(--shadow); }
+.prochain-card .pc-h{ font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; opacity:.9; }
+.prochain-card .pc-t{ font-family:var(--serif); font-size:1.6rem; margin:4px 0; }
+.prochain-card .pc-m{ opacity:.95; text-transform:capitalize; }
+.prochain-card .pc-lbl{ margin-top:16px; font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; opacity:.9; }
+.prochain-card .pc-names{ margin-top:8px; display:flex; flex-wrap:wrap; gap:8px; }
+.prochain-card .chip{ background:rgba(255,255,255,.22); color:#fff; border-color:transparent; }
+.benevoles-liste{ display:flex; flex-direction:column; gap:12px; margin-top:14px; }
+.bev{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow); }
+.bev-date{ font-weight:700; text-transform:capitalize; }
+.bev-t{ color:var(--muted); font-size:.95rem; }
+.bev-names{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.bev-names .vide{ color:var(--muted); }
+.chip{ display:inline-flex; align-items:center; gap:6px; background:var(--cream2); border:1px solid var(--line); border-radius:999px; padding:5px 12px; font-size:.9rem; font-weight:600; }
+.chip-x{ background:none; border:0; color:var(--coral-d); font-size:1.1rem; line-height:1; cursor:pointer; padding:0 0 0 2px; }
+.bev-add{ display:flex; gap:8px; flex-wrap:wrap; }
+.bev-add input{ flex:1; min-width:150px; padding:10px 12px; border:1px solid var(--bord-champ); border-radius:10px; }
