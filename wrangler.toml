@@ -1,12 +1,9 @@
-# Cloudflare Pages — site statique Le Tinal
+# Cloudflare Workers (static assets) — site Le Tinal
 name = "le-tinal"
-pages_build_output_dir = "./dist"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+main = "./dist/_worker.js/index.js"
 
-# Stockage partage du planning des benevoles (Cloudflare KV).
-# En LOCAL (npm run dev) : fonctionne tel quel (base locale simulee).
-# En PRODUCTION : creer un namespace KV dans Cloudflare (Workers & Pages >
-#   KV) nomme "benevoles", puis le lier au projet Pages :
-#   Settings > Bindings > KV > Variable = BENEVOLES. (ou coller son id ci-dessous)
-[[kv_namespaces]]
-binding = "BENEVOLES"
-id = "benevoles-local"
+[assets]
+directory = "./dist"
+binding = "ASSETS"
