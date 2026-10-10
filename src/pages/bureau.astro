@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+const types = ['Concert','Spectacle','Atelier','Ciné','Musique','Danse','Jeux','Vernissage','Expo','Balade','Marché','Festival','Conte','Dégustation','Karaoké','Rencontre'];
+---
+<Base title="Bureau — Programme" description="Gestion du programme du Tinal — accès réservé au bureau.">
+  <section class="section" style="padding-top:48px">
+    <div class="contenu" style="max-width:780px">
+      <span class="eyebrow">Réservé au bureau</span>
+      <h1>Gérer le programme</h1>
+
+      <div id="gate" class="gate">
+        <p>Entrez le code d'accès du bureau.</p>
+        <form id="gateForm" class="gate-form">
+          <input id="code" type="password" placeholder="Code d'accès" autocomplete="off" />
+          <button class="bouton" type="submit">Entrer</button>
+        </form>
+        <p id="gateErr" class="gate-err" hidden>Code incorrect, réessayez.</p>
+        <p style="color:var(--muted);font-size:.9rem;margin-top:14px">Astuce : sur le téléphone, menu du navigateur → « Ajouter à l'écran d'accueil » pour l'avoir comme une appli.</p>
+      </div>
+
+      <div id="app" hidden>
+        <div class="bureau-bar">
+          <button class="bouton" id="btnAdd">+ Ajouter un événement</button>
+          <span id="statut" class="statut"></span>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="form" class="bureau-form" hidden>
+          <input type="hidden" id="f_id" />
+          <div class="grid2">
+            <label>Date<input type="date" id="f_date" required /></label>
+            <label>Heure<input type="text" id="f_heure" placeholder="ex. 19h30" /></label>
+          </div>
+          <label>Titre<input type="text" id="f_titre" maxlength="120" required placeholder="ex. Concert de la chorale" /></label>
+          <div class="grid2">
+            <label>Type<input type="text" id="f_type" list="types" placeholder="ex. Concert" /></label>
+            <label>Lieu<input type="text" id="f_lieu" placeholder="ex. Le Tinal" /></label>
+          </div>
+          <datalist id="types">{types.map(t => <option value={t}></option>)}</datalist>
+          <label>Texte / description<textarea id="f_desc" rows="3" maxlength="1000" placeholder="Quelques phrases de présentation…"></textarea></label>
+          <div class="grid2">
+            <label class="check"><input type="checkbox" id="f_gratuit" /> Gratuit</label>
+            <label>Prix (si payant)<input type="text" id="f_prix" placeholder="ex. 5 €" /></label>
+          </div>
+          <label>Mini-image
+            <input type="file" id="f_imgfile" accept="image/*" />
+          </label>
+          <div id="imgPrev" class="img-prev" hidden><img id="imgPrevImg" alt="aperçu" /><button type="button" id="imgClear" class="lien-sup">Retirer l'image</button></div>
+          <input type="hidden" id="f_image" />
+          <div class="form-actions">
+            <button class="bouton" type="submit" id="btnSave">Enregistrer</button>
+            <button class="bouton secondaire" type="button" id="btnCancel">Annuler</button>
+          </div>
+          <p id="formErr" class="gate-err" hidden></p>
+        </form>
+
+        <!-- Liste -->
+        <div id="liste" class="bureau-liste"></div>
+
+        <details class="danger">
+          <summary>Options avancées</summary>
+          <p style="color:var(--muted);font-size:.9rem">Rétablir le programme d'origine (annule toutes les modifications faites ici).</p>
+          <button class="bouton secondaire" id="btnReset">Réimporter le programme d'origine</button>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var moisCourt = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+      var code = sessionStorage.getItem('bureau_code') || '';
+      var EVENTS = [];
+      function $(id){ return document.getElementById(id); }
+      function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+      function fmt(d){ try { return new Date(d+'T00:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}); } catch(e){ return d; } }
+      function imgSrc(im){ if(!im) return ''; if(im.indexOf('data:')===0||im.charAt(0)==='/') return im; return '/photos/events/'+im; }
+
+      function statut(msg){ var s=$('statut'); s.textContent=msg||''; if(msg){ setTimeout(function(){ if(s.textContent===msg) s.textContent=''; },2500); } }
+
+      function api(action, payload){
+        var body = Object.assign({ code: code, action: action }, payload||{});
+        return fetch('/api/programme', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body) });
+      }
+
+      function renderList(){
+        var desc = EVENTS.slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+        $('liste').innerHTML = desc.length ? desc.map(function(e){
+          return '<div class="brow">'
+            + '<div class="brow-thumb">'+(e.image?'<img src="'+imgSrc(e.image)+'" alt="" />':'<span class="noimg">—</span>')+'</div>'
+            + '<div class="brow-main"><div class="brow-date">'+fmt(e.date)+(e.heure?' · '+esc(e.heure):'')+'</div>'
+            + '<div class="brow-titre">'+esc(e.titre)+'</div>'
+            + '<div class="brow-meta">'+[e.type,e.lieu].filter(Boolean).map(esc).join(' · ')+'</div></div>'
+            + '<div class="brow-act"><button class="mini" data-edit="'+e.id+'">Modifier</button><button class="mini sup" data-del="'+e.id+'">Suppr.</button></div>'
+            + '</div>';
+        }).join('') : '<p style="color:var(--muted)">Aucun événement. Cliquez sur « Ajouter un événement ».</p>';
+        wire();
+      }
+
+      function openForm(ev){
+        $('form').hidden=false; $('formErr').hidden=true;
+        $('f_id').value = ev ? ev.id : '';
+        $('f_date').value = ev ? ev.date : '';
+        $('f_heure').value = ev ? ev.heure : '';
+        $('f_titre').value = ev ? ev.titre : '';
+        $('f_type').value = ev ? ev.type : '';
+        $('f_lieu').value = ev ? ev.lieu : '';
+        $('f_desc').value = ev ? ev.description : '';
+        $('f_gratuit').checked = ev ? !!ev.gratuit : false;
+        $('f_prix').value = ev ? ev.prix : '';
+        $('f_image').value = ev && ev.image ? ev.image : '';
+        setPrev(ev && ev.image ? imgSrc(ev.image) : '');
+        $('form').scrollIntoView({behavior:'smooth',block:'start'});
+      }
+      function closeForm(){ $('form').hidden=true; $('f_imgfile').value=''; }
+
+      function setPrev(src){
+        if(src){ $('imgPrevImg').src=src; $('imgPrev').hidden=false; }
+        else { $('imgPrevImg').removeAttribute('src'); $('imgPrev').hidden=true; }
+      }
+
+      function resizeImage(file, cb){
+        var reader=new FileReader();
+        reader.onload=function(){
+          var img=new Image();
+          img.onload=function(){
+            var max=700, w=img.width, h=img.height;
+            if(w>max||h>max){ if(w>h){ h=Math.round(h*max/w); w=max; } else { w=Math.round(w*max/h); h=max; } }
+            var c=document.createElement('canvas'); c.width=w; c.height=h;
+            c.getContext('2d').drawImage(img,0,0,w,h);
+            cb(c.toDataURL('image/jpeg',0.72));
+          };
+          img.src=reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function wire(){
+        Array.prototype.forEach.call(document.querySelectorAll('[data-edit]'),function(b){
+          b.onclick=function(){ var e=EVENTS.filter(function(x){return x.id===b.getAttribute('data-edit');})[0]; if(e) openForm(e); };
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('[data-del]'),function(b){
+          b.onclick=function(){
+            if(!confirm('Supprimer cet événement ?')) return;
+            api('delete',{ id:b.getAttribute('data-del') }).then(handle).then(function(){ statut('Supprimé.'); });
+          };
+        });
+      }
+
+      function handle(r){
+        if(r.status===401){ logout(); throw new Error('code'); }
+        return r.json().then(function(j){ if(j && j.events){ EVENTS=j.events; renderList(); } if(j && j.ok===false){ throw new Error(j.error||'err'); } return j; });
+      }
+
+      function logout(){ sessionStorage.removeItem('bureau_code'); code=''; $('app').hidden=true; $('gate').hidden=false; }
+
+      function load(){
+        return fetch('/api/programme').then(function(r){return r.json();}).then(function(j){
+          EVENTS=(j&&j.events)||[]; $('gate').hidden=true; $('app').hidden=false; renderList(); return true;
+        });
+      }
+
+      // événements UI
+      $('btnAdd').onclick=function(){ openForm(null); };
+      $('btnCancel').onclick=closeForm;
+      $('imgClear').onclick=function(){ $('f_image').value=''; setPrev(''); $('f_imgfile').value=''; };
+      $('f_imgfile').onchange=function(){
+        var f=this.files&&this.files[0]; if(!f) return;
+        resizeImage(f,function(dataUrl){
+          if(dataUrl.length>320000){ $('formErr').textContent='Image encore un peu lourde, réessayez avec une photo plus petite.'; $('formErr').hidden=false; return; }
+          $('f_image').value=dataUrl; setPrev(dataUrl); $('formErr').hidden=true;
+        });
+      };
+      $('btnReset').onclick=function(){
+        if(!confirm('Rétablir le programme d\'origine ? Les modifications faites ici seront perdues.')) return;
+        api('reset',{}).then(handle).then(function(){ statut('Programme d\'origine rétabli.'); });
+      };
+      $('form').onsubmit=function(e){
+        e.preventDefault(); $('formErr').hidden=true;
+        var ev={ id:$('f_id').value||undefined, date:$('f_date').value, heure:$('f_heure').value.trim(),
+          titre:$('f_titre').value.trim(), type:$('f_type').value.trim(), lieu:$('f_lieu').value.trim(),
+          description:$('f_desc').value.trim(), gratuit:$('f_gratuit').checked, prix:$('f_prix').value.trim(), image:$('f_image').value };
+        if(!ev.date||!ev.titre){ $('formErr').textContent='La date et le titre sont obligatoires.'; $('formErr').hidden=false; return; }
+        $('btnSave').disabled=true;
+        api('upsert',{ event:ev }).then(handle).then(function(){ closeForm(); statut('Enregistré ✓'); }).catch(function(err){
+          if(err.message!=='code'){ $('formErr').textContent='Erreur : '+err.message; $('formErr').hidden=false; }
+        }).then(function(){ $('btnSave').disabled=false; });
+      };
+
+      $('gateForm').onsubmit=function(e){
+        e.preventDefault(); code=$('code').value; $('gateErr').hidden=true;
+        // teste le code via une écriture neutre impossible -> on valide via un upsert fictif ? plutôt via un endpoint. On tente un reset-less check:
+        api('__check__',{}).then(function(r){
+          if(r.status===401){ $('gateErr').hidden=false; code=''; return; }
+          sessionStorage.setItem('bureau_code',code); load();
+        }).catch(function(){ $('gateErr').hidden=false; code=''; });
+      };
+
+      if(code){ load(); }
+    })();
+  </script>
+</Base>

@@ -46,6 +46,7 @@ const telBrut = site.telephone.replace(/\s/g,'');
     <div class="contenu">
       <span class="eyebrow">À l'affiche</span>
       <h2>Les prochains rendez-vous</h2>
+      <div id="prog-prochains">
       {liste.map(e => (
         <article class={`evt ${couleurType(e.type)}`}>
           <div class="cal"><div class="j">{jour(e.date)}</div><div class="m">{mois(e.date)}</div></div>
@@ -57,6 +58,7 @@ const telBrut = site.telephone.replace(/\s/g,'');
           </div>
         </article>
       ))}
+      </div>
       <p style="margin-top:20px"><a class="bouton secondaire" href="/programme">Toute la saison &rarr;</a></p>
     </div>
   </section>
@@ -105,4 +107,5 @@ const telBrut = site.telephone.replace(/\s/g,'');
       </div>
     </div>
   </section>
+  <script src="/prog-live.js" defer></script>
 </Base>
