@@ -24,7 +24,7 @@ const desc = description ?? site.objet;
   <meta property="og:description" content={desc} />
   <meta property="og:type" content="website" />
 </head>
-<body>
+<body class={admin ? "app" : undefined}>
   {!admin && <Header />}
   <main>
     <slot />
