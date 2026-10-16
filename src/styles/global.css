@@ -1,6 +1,6 @@
 /* Le Tinal — thème clair, festif et coloré (esprit "Les Bois d'Arthur", version gaie) */
 :root{
-  --cream:#fff8ef; --cream2:#fdefdd; --card:#ffffff;
+  --cream:#e9ddc8; --cream2:#e0d1b7; --card:#ffffff;
   --ink:#2a2233; --muted:#7c7288; --line:#f0e3d2; --bord-champ:#e4d3bd;
 
   --coral:#ff6a3d; --coral-d:#ef4f22;
@@ -34,7 +34,7 @@ h3{font-size:1.3rem}
 .bouton.secondaire:hover{border-color:var(--coral);color:var(--coral-d);transform:translateY(-2px)}
 
 /* Header */
-.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,248,239,.82);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(233,221,200,.86);border-bottom:1px solid var(--line)}
 .site-header .contenu{display:flex;align-items:center;gap:16px;height:72px;position:relative}
 .marque{display:flex;align-items:center;gap:12px}
 .marque .logo{width:44px;height:44px;flex:none}
@@ -315,3 +315,10 @@ h1,h2,h3{ letter-spacing:.2px; }
 .danger summary{ cursor:pointer; color:var(--muted); font-weight:600; }
 .danger .bouton{ margin-top:10px; }
 @media(max-width:560px){ .bureau-form .grid2{ grid-template-columns:1fr; } .brow{ grid-template-columns:48px 1fr; } .brow-act{ grid-column:1 / -1; flex-direction:row; } .brow-thumb img,.brow-thumb .noimg{ width:48px; height:48px; } }
+
+/* Barre supérieure de l'appli bureau */
+.bureau-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 18px;background:var(--vert);color:#fff}
+.bureau-top strong{font-family:var(--serif);font-size:1.05rem;letter-spacing:.01em}
+.bureau-top a{color:#fff;font-size:.8rem;font-weight:700;text-decoration:none;border:1.5px solid rgba(255,255,255,.6);padding:6px 13px;border-radius:999px;transition:.2s;white-space:nowrap}
+.bureau-top a:hover{background:rgba(255,255,255,.16)}

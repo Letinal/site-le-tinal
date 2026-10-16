@@ -2,7 +2,11 @@
 import Base from '../layouts/Base.astro';
 const types = ['Concert','Spectacle','Atelier','Ciné','Musique','Danse','Jeux','Vernissage','Expo','Balade','Marché','Festival','Conte','Dégustation','Karaoké','Rencontre'];
 ---
-<Base title="Bureau — Programme" description="Gestion du programme du Tinal — accès réservé au bureau.">
+<Base title="Bureau — Programme" description="Gestion du programme du Tinal — accès réservé au bureau." admin={true}>
+  <div class="bureau-top">
+    <strong>Le Tinal · Bureau</strong>
+    <a href="/" target="_blank" rel="noopener">Voir le site ↗</a>
+  </div>
   <section class="section" style="padding-top:48px">
     <div class="contenu" style="max-width:780px">
       <span class="eyebrow">Réservé au bureau</span>
