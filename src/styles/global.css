@@ -34,7 +34,7 @@ h3{font-size:1.3rem}
 .bouton.secondaire:hover{border-color:var(--coral);color:var(--coral-d);transform:translateY(-2px)}
 
 /* Header */
-.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(233,221,200,.86);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:var(--cream);border-bottom:1px solid var(--line)}
 .site-header .contenu{display:flex;align-items:center;gap:16px;height:72px;position:relative}
 .marque{display:flex;align-items:center;gap:12px}
 .marque .logo{width:44px;height:44px;flex:none}
