@@ -1,0 +1,18 @@
+---
+// Ancienne adresse de l'appli : redirige vers la vraie page de gestion.
+export const prerender = true;
+---
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="refresh" content="0; url=/bureau/" />
+<link rel="canonical" href="/bureau/" />
+<title>Redirection…</title>
+<script>location.replace('/bureau/');</script>
+</head>
+<body style="font-family:system-ui;padding:40px;text-align:center">
+<p>Redirection vers la gestion du programme… <a href="/bureau/">Cliquez ici</a>.</p>
+</body>
+</html>

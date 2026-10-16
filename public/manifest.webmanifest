@@ -1,8 +1,8 @@
 {
-  "name": "Le Tinal — Adhérents",
-  "short_name": "Le Tinal",
-  "description": "Site et gestion des adhésions de l'association Le Tinal (Ouveillan).",
-  "start_url": "/admin",
+  "name": "Bureau du Tinal",
+  "short_name": "Bureau",
+  "description": "Gestion du programme de l'association Le Tinal (Ouveillan).",
+  "start_url": "/bureau/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
